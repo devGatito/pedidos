@@ -51,3 +51,70 @@
       cursor: pointer;
       font-size: 16px;
     }
+    .item-pedido {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+.eliminar-btn {
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.eliminar-btn:hover {
+    background: #cc0000;
+}
+
+.alerta {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 300px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+    animation: slideIn 0.5s forwards;
+}
+
+.alerta-success {
+    background: #4CAF50;
+}
+
+.alerta-error {
+    background: #f44336;
+}
+
+.alerta button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+/* Botón PayPal personalizado */
+#paypal-button-container {
+    margin: 20px 0;
+    transition: all 0.3s;
+}
+4.
