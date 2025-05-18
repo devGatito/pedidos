@@ -1,0 +1,274 @@
+#boton-carrito {
+  position: fixed; 
+  bottom: 20px;    
+  right: 20px;     
+  background-color: #00695c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  outline: none;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  position: fixed;
+}
+/* Botón carrito flotante */
+#boton-carrito {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #00695c;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  color: white;
+  font-size: 24px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  user-select: none;
+}
+
+
+/* Modal (fondo oscuro) */
+.modal {
+  display: none; /* oculto por defecto */
+  position: fixed;
+  z-index: 15000;
+  left: 0; top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  overflow-y: auto;
+}
+
+/* Contenido del modal (caja blanca) */
+.modal-content {
+  background-color:  #00695c;
+;
+  margin: 60px auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 480px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  position: relative;
+  font-family: Arial, sans-serif;
+}
+
+/* Botón cerrar (X) */
+.cerrar {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #888;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cerrar:hover {
+  color: #333;
+}
+
+/* Items dentro del modal */
+.item-carrito {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-nombre {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.item-cantidad {
+  color: #666;
+  font-size: 13px;
+}
+
+.item-subtotal {
+  font-weight: 600;
+  min-width: 60px;
+  text-align: right;
+}
+
+/* Botones acciones (más, menos, eliminar) */
+.item-acciones button {
+  background: #eee;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin-left: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.item-acciones button:hover {
+  background-color: #ccc;
+}
+
+/* Total al final */
+#modal-total {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: right;
+}
+/* Modal (fondo oscuro) */
+.modal {
+  display: none; /* oculto por defecto */
+  position: fixed;
+  z-index: 15000;
+  left: 0; top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  overflow-y: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Contenido del modal (caja blanca) */
+.modal-content {
+  background-color: white;
+  max-width: 700px;   /* aumenta el ancho máximo */
+  width: 95%;         /* casi todo el ancho en móvil */
+  max-height: 90vh;   /* que no sea más alto que 90% de la ventana */
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  position: relative;
+  font-family: Arial, sans-serif;
+  overflow-y: auto;   /* scroll interno si contenido largo */
+}
+
+/* Botón cerrar (X) */
+.cerrar {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 32px;
+  font-weight: bold;
+  color: #666;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s;
+}
+
+.cerrar:hover {
+  color: #222;
+}
+
+/* Items dentro del modal */
+.item-carrito {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 12px 0;
+  font-size: 15px;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+  max-width: 60%;
+}
+
+.item-nombre {
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #00695c;
+}
+
+.item-cantidad {
+  color: #444;
+  font-size: 14px;
+}
+
+.item-subtotal {
+  font-weight: 700;
+  min-width: 80px;
+  text-align: right;
+  color: #222;
+}
+
+/* Botones acciones (más, menos, eliminar) */
+.item-acciones button {
+  background: #eee;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  margin-left: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  transition: background-color 0.25s ease;
+}
+
+.item-acciones button:hover {
+  background-color: #ccc;
+}
+
+/* Total al final */
+#modal-total {
+  margin-top: 25px;
+  font-size: 22px;
+  font-weight: 800;
+  text-align: right;
+  color: #004d40;
+}
+
+/* Scroll si el contenido es muy largo */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 105, 92, 0.6);
+  border-radius: 4px;
+}
+
+/* Responsive para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 20px;
+    max-width: 95%;
+  }
+
+  .item-info {
+    max-width: 55%;
+  }
+
+  #modal-total {
+    font-size: 18px;
+  }
+}

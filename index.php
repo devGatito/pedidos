@@ -1,81 +1,92 @@
-<!-- index.php -->
 <!DOCTYPE html>
-<html lang="es">
+<html>
+
 <head>
   <meta charset="UTF-8" />
   <title>Sistema de Pedidos - Cevichería</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="./styles/index.css" />
-  <style>
-    .alerta {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 15px;
-      border-radius: 5px;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 300px;
-      z-index: 1000;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      animation: slideIn 0.5s forwards;
-    }
-    
-    .alerta-success {
-      background-color: #4CAF50;
-    }
-    
-    .alerta-error {
-      background-color: #F44336;
-    }
-    
-    .alerta-warning {
-      background-color: #FF9800;
-    }
-    
-    @keyframes slideIn {
-      from { transform: translateX(100%); }
-      to { transform: translateX(0); }
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h2>Pedidos - Cevichería Cantaros</h2>
+  <link rel="stylesheet" href="./styles/header.css">
+  <link rel="stylesheet" href="./styles/carrito.css">
+  <link rel="stylesheet" href="./styles/platillos.css">
 
-    <button class="cart-button" onclick="mostrarMenu()">
-      <i class="fas fa-shopping-cart"></i> Hacer Pedido
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar">
+      <div class="logo">Cevicheria</div>
+      <ul class="nav-links">
+        <li><a href="./index.php">Menú</a></li>
+        <li><a href="./crearPlatillos.php">Crear Platillos</a></li>
+        <li><a href="./ordenesCreadas.php">Ordenes Creadas</a></li>
+      </ul>
+
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1>Pedidos - Cevichería Cantaros</h1>
+
+
+    <?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
+    // Incluimos la conexión
+    require 'conexion.php';
+
+    // Consulta para obtener todos los platillos
+    $sql = "SELECT id, nombre, descripcion, precio FROM platillos ORDER BY nombre ASC";
+    $stmt = $pdo->query($sql);
+    $platillos = $stmt->fetchAll();
+
+    if (count($platillos) === 0) {
+      echo "<p>No hay platillos disponibles por el momento.</p>";
+    } else {
+      echo '<div class="platillos-lista">';
+      foreach ($platillos as $platillo) {
+        echo '<div class="platillo">';
+        echo '<h3>' . htmlspecialchars($platillo['nombre']) . '</h3>';
+        echo '<p>' . htmlspecialchars($platillo['descripcion']) . '</p>';
+        echo '<p><strong>Precio:</strong> S/ ' . number_format($platillo['precio'], 2) . '</p>';
+        echo '<button class="agregar-btn" data-nombre="' . htmlspecialchars($platillo['nombre']) . '" data-precio="' . $platillo['precio'] . '">Agregar</button>';
+        echo '</div>';
+      }
+      echo '</div>';
+    }
+    ?>
+    <button id="boton-carrito" title="Ver pedido">
+      <span id="cantidad-items">0</span>
     </button>
 
-    <div class="menu" id="menu" style="display: none;">
-      <button onclick="agregarPedido('ceviche', 35)">ceviche – S/35.00</button>
-      <button onclick="agregarPedido('parihuela', 40)">parihuela – S/40.00</button>
-      <button onclick="agregarPedido('trio marino', 50)">trio marino – S/50.00</button>
-      <button onclick="agregarPedido('arroz con mariscos', 45)">arroz con mariscos – S/45.00</button>
-      <h4>Entradas</h4>
-      <button onclick="agregarPedido('chicharrón de pota', 10)">chicharrón de pota – S/10.00</button>
-      <button onclick="agregarPedido('chilcano', 10)">chilcano – S/10.00</button>
-      <h5>Bebidas</h5>
-      <button onclick="agregarPedido('chicha morada', 12)">chicha morada – S/12.00</button>
-      <button onclick="agregarPedido('maracuyá', 10)">maracuyá – S/10.00</button>
-      <button onclick="agregarPedido('limonada frozen', 14)">limonada frozen – S/14.00</button>
-    </div>
 
-    <div class="summary" id="resumen">
-      <h3>Resumen del pedido</h3>
-      <div id="lista"></div>
-      <p id="total"></p>
-    </div>
 
-    <button class="confirmar-btn" onclick="confirmarPedido()">Confirmar Pedido</button>
-
-    <div id="paypal-button-container"></div>
-
-   <script src="https://www.sandbox.paypal.com/sdk/js?client-id=Aa4btnTFzM9bkBberirQ8wo8q7WcmSXulSudK493O2uwo_LgEh8nsRrU53-j0jBSz5AhZc9z-YjTV0u8&currency=USD"></script>
-
-    <script src="./js/main.js"></script> 
   </div>
+
+  <!-- Modal resumen -->
+  <div id="modal-resumen" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="cerrar">&times;</span>
+      <h2>Resumen del pedido</h2>
+      <div id="modal-lista"></div>
+      <div id="modal-total"></div>
+          <div id="paypal-button-container"></div>
+
+    </div>
+  </div>
+
+  <div id="resumen-pedido" style="display:none;">
+    <h2>Resumen del pedido</h2>
+    <div id="lista"></div>
+    <div id="total"></div>
+  </div>
+
+
+  <script src="./js/main.js"></script>
+<script src="https://www.sandbox.paypal.com/sdk/js?client-id=AQpBTgiZFSa1vZxyAVLxbZmOn946fuRYfzKuZoGfXpDnNy48kv02pW_WIRV1hkORUA8ZMDx2gecJUFFK&currency=USD"></script>
+
 </body>
+
 </html>
